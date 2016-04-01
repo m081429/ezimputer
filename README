@@ -1,0 +1,65 @@
+(1) INSTALLING THE TOOLS:
+
+Following tools are required   to run this package
+(1)	PLINK v1.07
+(2)	STRUCTURE v2.3.4
+(3)	STRUCTURE_PARAM
+(4)	SHAPEIT v2.r790
+(5)	IMPUTE v2.3.1
+(6)	CHECK_STRAND
+(7)	GPROBS
+
+If all the above tools are not installed, then you can run the script "install_tools.sh" to download the tools and create the tool info file. This script will ensure the tools are downloaded properly and have right permissions to execute.
+
+The install script checks if particular tool already exists in the path  before downloading(uses which command to see tools exists in the PATH).
+So make sure the  tools which already exists are in the PATH before running the script. (needs to be the same version as specified)
+sh install_tools.sh
+usage: install_tools.sh <path_to_install_directory>  <PATH & NAME TO CREATE TOOL INFO FILE>
+
+Example:
+if you have downloaded the ezimputer and uncompressed in the directory /home/install/ezimputer
+Following programming languages are required to run this package
+(i)     PERL
+(ii)     PYTHON
+(iii)     JAVA
+(iv)     SH
+You can run the imputation step using the cluster like Open Grid Engine or Sun Grid Engine or PBS (optional)
+(v)  QSUB (Optional)
+
+
+Execute the following command to install the tools in the desired  directory for ex: /home/install/ezimputer/EZIMPUTERTOOLS and to create the tool info file
+sh /home/install/ezimputer2/install_tools.sh  /home/install/ezimputer/EZIMPUTERTOOLS /home/install/ezimputer/EZIMPUTERTOOLS/ToolInfo.config
+
+3) RUNNING THE EXAMPLES: 
+You can run the examples present in the "examples" directory. All the below examples doesn't require Open Grid Engine, Sun Grid Engine or PBS to run. Please redirect the standard output and error to a file(See example).
+
+**********************Please use absoulte paths while executing the scripts*************************
+	RUN_ALL_EXAMPLES.csh: This script executes all the below examples sequentially.
+	Ex: sh RUN_ALL_EXAMPLES.csh  /home/install/ezimputer/ /home/install/ezimputer/examples  /home/install/ezimputer/EZIMPUTERTOOLS/ToolInfo.config> RUN_ALL_EXAMPLES.log 2>&1
+			
+			(or)
+
+	(i)	WHOLE_GENOME_CHROMOSOME_IMPUTATION_SGE_WRAPPER.sh: 
+			(a) Downloads the hapmap data (samples with 1457897 snps, contains chromosome 1-22,X,Y,M) 
+			(b) We need to filter the data to first 50 samples and chr22 markers in order to execute this script faster and make less memory intensive 
+			(c) Upgrade to build37 
+			(d) Perform Phasing & imputation 
+Ex: sh WHOLE_GENOME_CHROMOSOME_IMPUTATION_SGE_WRAPPER.sh /home/install/ezimputer/ /home/install/ezimputer/test /home/install/ezimputer/EZIMPUTERTOOLS/ToolInfo.config > WHOLE_GENOME_CHROMOSOME_IMPUTATION_SGE_WRAPPER.log 2>&1
+
+Check the following folder for the results /home/install/ezimputer/test/WHOLECHR/Impute_tmp/impute/
+
+	(ii)	SMALL_REGION_IMPUTATION_SGE_WRAPPER.sh
+			(a) Extracting the smaller region to prepare the inputdata set i.e. chr 22 from 43500 kb to 46000 kb.
+			(b) Perform Phasing & Imputation.
+Ex: sh SMALL_REGION_IMPUTATION_SGE_WRAPPER.sh /home/install/ezimputer/ /home/install/ezimputer/test /home/install/ezimputer/EZIMPUTERTOOLS/ToolInfo.config> SMALL_REGION_IMPUTATION_SGE_WRAPPER.log 2>&1
+Check the following folder for the results /home/install/ezimputer/test/ SMALL_REGION/Impute_tmp/impute/
+
+
+	(iii)	SINGLE_SAMPLE_IMPUTATION_SGE_WRAPPER.sh
+			(a) Extracting the single sample to prepare the inputdata set .
+			(b) Perform Phasing & Imputation.
+Ex: sh SINGLE_SAMPLE_IMPUTATION_SGE_WRAPPER.sh /home/install/ezimputer/ /home/install/ezimputer/test /home/install/ezimputer/EZIMPUTERTOOLS/ToolInfo.config> SINGLE_SAMPLE_IMPUTATION_SGE_WRAPPER.log 2>&1
+
+Check the following folder for the results /home/install/ezimputer/test/SINGLE_SAMPLE/Impute_tmp/impute/
+
+NOTE: All the necessary input files will be downloaded in the example script WHOLE_GENOME_CHROMOSOME_IMPUTATION_SGE_WRAPPER.sh, so make sure you run the run the example "WHOLE_GENOME_CHROMOSOME_IMPUTATION_SGE_WRAPPER.sh" in order to run "SMALL_REGION_IMPUTATION_SGE_WRAPPER.sh" and "SINGLE_SAMPLE_IMPUTATION_SGE_WRAPPER.sh". 

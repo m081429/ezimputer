@@ -1,0 +1,43 @@
+RESULTS 
+The TEMPFOLDER/ INNER_DIR (You specified this in the config file) will be your final output folder. All the below files are located in the individual chromosome directories (restricted to chromosomes present in the input data).For whole genome imputation you can see folders from 1-23 (From chromosome 1 to chromosome 23) and for small region imputation you can only see the chromosomes present in the input data.
+(i)	final.2prob.gz (Two probability file) : Individual window  two probability output files will be merged at the chromosome level. (One file per chromosome) . The two likelihood format reports two numbers (F1 I1) per genotype (F1=Likelyhood of Hom of first Allele, and I1=Likelyhood of Het).
+(ii)	dosage.gz : Dosage file per chromosome. (One file per chromosome).
+(iii)	Combined_impute_results_3_prob_ambi_out.gz : Three probability file for SNVs only (not indels).
+Columns are .---., markerid, position, AlleleA, AlleleB, and then 3 columns for each samples representing 3 genotype likelihoods per samples for the  AA, AB, and  BB genotypes.
+(iv)	beagle_r2.gz : Output from beagle utility (gprobsmetrics.jar for calculating various R2 values) . This file does not contain r2 values for indel polymorphisms. See below section for header description.
+(v)	final.map.gz : Plink map file is generated for all the markers. (COLUMN DESCRIPTION: chromosome, rsid, distance, position).
+(vi)	Combined_impute_results_3_prob_indels_out.gz : Imputed indels are separated.
+(vii)	Combined_impute_results_3_prob_ind.gz : Indicator file(matrix) for SNVs to differentiate observed and imputed marker(rows) and sample(columns).(Column 1 : RSID, Column2 : Dosage R2 value, From column 3 : sample 1, Column 4 : sample2 ..Rows are markers and Columns are samples. Sample order matches tfam file. Indicator .1.is imputed and Indicator .0. is observed).
+(viii) impute_out_chr2.window8_info.gz : R2 info file from impute2 software
+Header for the Impute R2 info file
+(1) snp_id 
+(2) rs_id 
+(3) position 
+(4) exp_freq_a1 
+(5) info 
+(6) certainty 
+(7) type 
+(8) info_type0 
+(9) concord_type0 
+(10) r2_type0	
+ (ix) Phasing output ..haps. files from all the chromosomes will be combined and tar compressed .shapeit_jobs.tar.gz. and can be found in the SHAPEIT_OUTPUT directory.  
+Copy the necessary output file and delete the temp folder. The only reason we retained all the temp files even after the run is successful to trace the unexpected errors easily.
+HEADERS FOR BEAGLE R2 FILES
+1) marker identifier
+2) minor allele
+3) minor allele frequency
+4) allelic r-squared
+5) dosage r-squared
+6) HWE dosage r-squared
+7) accuracy
+8) missing score
+
+Notes:
+a) Allelic r-squared is the estimated squared correlation between the most likely allele dosage (rounded to the nearest integer) and the true allele dosage.
+b) Dosage r-squared is the estimated squared correlation between the estimated allele dosage (0*P(Hom Ref/first) + 1*P(AB) + 2*P(Hom Alt/second)) and the true allele dosage.
+c) HWE dosage r-squared, is the estimated squared correlation between the estimated allele dosage and the true allele dosage when the variance of the true allele dosage is calculated from the estimated allele frequency.
+d) Accuracy is the estimated genotype accuracy based on the posterior probability of the most likely genotype.
+e) Missing score is the infinum of the C > 0 such that the proportion of genotype with probability < C is greater than or equal to (1.0 - C).
+f) Monomorphic markers are assigned r-squared values of 0, and accuracy and missing score values of 1.
+g) The squared correlation metrics can be derived using arguments found in Appendix 1 of "Browning BL and Browning SR, Am J Hum Genet 2009;84(2):210-23".
+h) For comparison purposes, we report all r-squared metrics. The allelic r-squared metric is the default reported by BEAGLE and the dosage r-squared metric is the default reported by MACH.

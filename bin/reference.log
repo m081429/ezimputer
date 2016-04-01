@@ -1,0 +1,49 @@
+
+@----------------------------------------------------------@
+|        PLINK!       |     v1.07      |   10/Aug/2009     |
+|----------------------------------------------------------|
+|  (C) 2009 Shaun Purcell, GNU General Public License, v2  |
+|----------------------------------------------------------|
+|  For documentation, citation & bug-report instructions:  |
+|        http://pngu.mgh.harvard.edu/purcell/plink/        |
+@----------------------------------------------------------@
+
+Web-based version check ( --noweb to skip )
+Connecting to web...  OK, v1.07 is current
+
+Writing this text to log file [ reference.log ]
+Analysis started: Tue Dec  4 17:24:49 2012
+
+Options in effect:
+	--bfile ./GENOTYPING_QC_FWD/bin/reference
+	--extract kk
+	--make-bed
+	--out reference
+
+Reading map (extended format) from [ ./GENOTYPING_QC_FWD/bin/reference.bim ] 
+10253 markers to be included from [ ./GENOTYPING_QC_FWD/bin/reference.bim ]
+Reading pedigree information from [ ./GENOTYPING_QC_FWD/bin/reference.fam ] 
+386 individuals read from [ ./GENOTYPING_QC_FWD/bin/reference.fam ] 
+0 individuals with nonmissing phenotypes
+Assuming a disease phenotype (1=unaff, 2=aff, 0=miss)
+Missing phenotype value is also -9
+0 cases, 0 controls and 386 missing
+199 males, 187 females, and 0 of unspecified sex
+Reading genotype bitfile from [ ./GENOTYPING_QC_FWD/bin/reference.bed ] 
+Detected that binary PED file is v1.00 SNP-major mode
+Reading list of SNPs to extract [ kk ] ... 10241 read
+Before frequency and genotyping pruning, there are 10241 SNPs
+386 founders and 0 non-founders found
+Total genotyping rate in remaining individuals is 0.976642
+0 SNPs failed missingness test ( GENO > 1 )
+0 SNPs failed frequency test ( MAF < 0 )
+After frequency and genotyping pruning, there are 10241 SNPs
+After filtering, 0 cases, 0 controls and 386 missing
+After filtering, 199 males, 187 females, and 0 of unspecified sex
+Writing pedigree information to [ reference.fam ] 
+Writing map (extended format) information to [ reference.bim ] 
+Writing genotype bitfile to [ reference.bed ] 
+Using (default) SNP-major mode
+
+Analysis finished: Tue Dec  4 17:24:50 2012
+
